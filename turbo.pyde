@@ -2,15 +2,13 @@ import time, random, os
 
 #classes
 
-
-
 class Game:
     def __init__(self):
         self.w=1280
         self.h=720
-        self.g=720-137
+        #self.g=720
         self.lanes=[]
-        #self.bgImgs=[]
+        self.bgImgs=[]
         self.x=0
         self.paused = False
         self.state = 'menu'
@@ -34,10 +32,10 @@ class Car:
     def display(self):
         #displaying the car
         
-class user_car(Car):
+class userCar(Car):
     pass
 
-class obs_car(Car):
+class obstacleCar(Car):
     pass
       
   
