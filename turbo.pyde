@@ -92,4 +92,9 @@ def keyReleased():
     pass
   
 def mouseClicked():
-    pass
+    if game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
+        and game.h//2-110 <= mouseY <= game.h//2-80:
+       game.state='play'
+    if game.state=='menu' and game.state=='menu' and game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
+        and game.h//2-10 <= mouseY <= game.h//2+40:
+       game.state='highscores'
