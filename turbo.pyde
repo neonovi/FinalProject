@@ -28,10 +28,17 @@ class Game:
         self.cnt = (self.cnt +1)%60
         if self.cnt == 0:
             self.sec +=1
-    
         
         fill(255)
-        text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
+        if self.sec%60<10 and self.sec//60<10:
+            text('0{0}:0{1}'.format(self.sec//60,self.sec%60), 10, 50)
+        elif self.sec//60<10:
+            text('0{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
+        elif self.sec%60<10:
+            text('{0}:0{1}'.format(self.sec//60,self.sec%60), 10, 50)
+        else:
+            text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
+            
 class Car:
     def __init__(self,x,y,h,w,model):
         self.x=x
