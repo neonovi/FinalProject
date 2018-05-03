@@ -18,8 +18,10 @@ class Game:
         self.bgImgs=[]
         self.x=0
         self.cnt=0
-        self.sec = 0
-        self.user_car = userCar(50,500,291,145,"\\resources\\car7.png")
+        self.sec = 120
+        self.user_car = userCar(50,620,150,70,"\\resources\\car7.png")
+        #self.user_car1= userCar(50,480,150,70,"\\resources\\car6.png")
+        #self.user_car2= userCar(50,550,150,70,"\\resources\\car5.png")
         #image layers of the background 
         for i in range(4):
             self.bgImgs.append(loadImage(path+'\\resources\\layer'+str(i+1)+'.png'))
@@ -50,7 +52,7 @@ class Game:
             
         self.cnt = (self.cnt +1)%60
         if self.cnt == 0:
-            self.sec +=1
+            self.sec -=1
         
         fill(0)
         textSize(32)
@@ -64,6 +66,7 @@ class Game:
             text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
             
         self.user_car.display()
+
                 
 class Car:
     def __init__(self,x,y,w,h,ImgName):
@@ -71,19 +74,31 @@ class Car:
         self.y=y
         self.h=h
         self.w=w
+        self.lane=0
+        #top lane y=490
+        #mid lane y=
         self.img=loadImage(ImgName)
-
+        self.direction=1
         
+    def update(self):
+        self.y+=self.lane
     def display(self):
+        self.update()
         image(self.img,self.x,self.y,self.w,self.h)
         
 class userCar(Car):
     def __init__(self,x,y,w,h,ImgName):
         Car.__init__ (self,x,y,w,h,ImgName)
-        
-        
-        
-        self.keyHandler={UP:False, DOWN: False}
+        self.keyHandler={UP:False,DOWN:False}
+    
+    def update(self):
+        if self.keyHandler[UP]:
+            self.lane = -7
+        elif self.keyHandler[DOWN]:
+            self.lane = 7
+        else:
+            self.lane = 0
+        self.y+=self.lane
         # self.move_sound=SoundFile (path+'\\resorces\\move_sound.mp3')
         
     #def display(self):
@@ -154,10 +169,11 @@ def draw():
         text(game.name,game.w//2,game.h//2)
   
 def keyPressed():
-    pass
+    if game.state == 'play':
+        game.user_car.keyHandler[keyCode]=True
   
 def keyReleased():
-    pass
+    game.user_car.keyHandler[keyCode]=False
   
 def mouseClicked():
     if game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
