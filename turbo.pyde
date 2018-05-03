@@ -10,21 +10,28 @@ class Game:
         self.state = 'menu'
         self.name=''
         
-    def create_game ():
+        
+    def create_game (self):
         self.lanes=[]
         self.bgImgs=[]
         self.x=0
-        self.time = 120
+        self.cnt=0
+        self.sec = 00
+        self.min=00
+        
         #image layers of the background 
             #for loop here
         #pause sound
         #load resources form the stage file (2 stages)
     
-    def display ():
+    def display (self):
         self.cnt = (self.cnt +1)%60
         if self.cnt == 0:
-            self.time -=1
-
+            self.sec +=1
+    
+        
+        fill(255)
+        text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
 class Car:
     def __init__(self,x,y,h,w,model):
         self.x=x
@@ -61,9 +68,10 @@ class Car:
 game = Game()
 
 def setup():
+    frameRate(500)
     size (game.w,game.h)
     background(0)
-    game.create_game
+    game.create_game()
   
   
 def draw():
@@ -83,7 +91,19 @@ def draw():
             fill(255)
         textSize(32)
         text("Highscores", game.w//2-80,game.h//2+30)
-  
+    elif game.state == 'play':
+        if not game.paused:
+            background(0)
+            game.display()
+        else:
+            fill(255,0,0)
+            textSize(32)
+            text("Pause",game.w//2,game.h//2)
+    elif game.state=='inputName':
+        background(0)
+        textSize(32)
+        text("Please enter your name",game.w//2,game.h//2-200)
+        text(game.name,game.w//2,game.h//2)
   
 def keyPressed():
     pass
