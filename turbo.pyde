@@ -19,7 +19,7 @@ class Game:
         self.x=0
         self.cnt=0
         self.sec = 0
-        self.user_car = userCar(50,600,100,100,"\\resources\\car7.png")
+        self.user_car = userCar(50,500,291,145,"\\resources\\car7.png")
         #image layers of the background 
         for i in range(4):
             self.bgImgs.append(loadImage(path+'\\resources\\layer'+str(i+1)+'.png'))
@@ -66,7 +66,7 @@ class Game:
         self.user_car.display()
                 
 class Car:
-    def __init__(self,x,y,h,w,ImgName):
+    def __init__(self,x,y,w,h,ImgName):
         self.x=x
         self.y=y
         self.h=h
@@ -75,11 +75,11 @@ class Car:
 
         
     def display(self):
-        image(self.img,50,600,100,100)
+        image(self.img,self.x,self.y,self.w,self.h)
         
 class userCar(Car):
-    def __init__(self,x,y,h,w,ImgName):
-        Car.__init__ (self,x,y,h,w,ImgName)
+    def __init__(self,x,y,w,h,ImgName):
+        Car.__init__ (self,x,y,w,h,ImgName)
         
         
         
