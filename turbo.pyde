@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-import time, random, os
-path = os.getcwd()
-print path
-=======
-
 import random, os
 add_library ('sound')
 path = os.getcwd ()
-
-
->>>>>>> c6757944334470b0df475b8c5a67d1ee8bbb7174
 #classes
 
 class Game:
@@ -30,14 +21,8 @@ class Game:
                 
         #image layers of the background 
         for i in range(4):
-<<<<<<< HEAD
+
             self.bgImgs.append(loadImage(path+'\\resources\\layer'+str(i+1)+'.png'))
-=======
-            self.bgImgs.append(loadImage(path+'\\resources\\layer1'+str(i+1)+'.png'))
-        
-        
-            #for loop here
->>>>>>> c6757944334470b0df475b8c5a67d1ee8bbb7174
         #pause sound
         #load resources form the stage file (2 stages)
     
