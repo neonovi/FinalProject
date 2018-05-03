@@ -2,6 +2,8 @@ import time, random, os
 
 #classes
 
+:)
+
 class Game:
     def __init__(self):
         self.w=1280
