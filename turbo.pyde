@@ -27,21 +27,7 @@ class Game:
         #load resources form the stage file (2 stages)
     
     def display (self):
-        self.cnt = (self.cnt +1)%60
-        if self.cnt == 0:
-            self.sec +=1
-        
-        fill(255)
-        if self.sec%60<10 and self.sec//60<10:
-            text('0{0}:0{1}'.format(self.sec//60,self.sec%60), 10, 50)
-        elif self.sec//60<10:
-            text('0{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
-        elif self.sec%60<10:
-            text('{0}:0{1}'.format(self.sec//60,self.sec%60), 10, 50)
-        else:
-            text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
-            
-        
+
         cnt = 0
         for img in self.bgImgs:
             if cnt == 0:
@@ -56,6 +42,23 @@ class Game:
             image(img,0,0,self.w-x,self.h,x,0,self.w,self.h)
             image(img,self.w-x-1,0,x,self.h,0,0,x,self.h)
             cnt+=1
+            
+        self.cnt = (self.cnt +1)%60
+        if self.cnt == 0:
+            self.sec +=1
+        
+        fill(0)
+        textSize(32)
+        if self.sec%60<10 and self.sec//60<10:
+            text('0{0}:0{1}'.format(self.sec//60,self.sec%60), 10, 50)
+        elif self.sec//60<10:
+            text('0{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
+        elif self.sec%60<10:
+            text('{0}:0{1}'.format(self.sec//60,self.sec%60), 10, 50)
+        else:
+            text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
+            
+        
                 
 class Car:
     def __init__(self,x,y,h,w):
@@ -93,7 +96,6 @@ class Car:
 game = Game()
 
 def setup():
-    frameRate(500)
     size (game.w,game.h)
     background(0)
     game.create_game()
@@ -102,20 +104,25 @@ def setup():
 def draw():
     if game.state == 'menu':
         image (game.img, 0, 0, game.w, game.h)
+        
         if game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
         and game.h//2-110 <= mouseY <= game.h//2-80:
-            fill(0,255,0)
+            fill(255,0,0)
         else:
             fill(0)
         textSize(32)
         text("Play Game",game.w//2-80,game.h//2-80)
         if game.state=='menu' and game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
         and game.h//2-10 <= mouseY <= game.h//2+40:
-            fill(0,255,0)
+            fill(255,0,0)
         else:
             fill(0)
         textSize(32)
         text("Highscores", game.w//2-80,game.h//2+30)
+        fill(0)
+        textSize(72)
+        text('TURBO',game.w//2-110,game.h-600)
+        
     elif game.state == 'play':
         if not game.paused:
             background(0)
