@@ -1,8 +1,6 @@
 # Turbo
-Our final project with mrymkhalili (Maryam Khalili)
+Introduction to computer science final project
 
-For our final project we made a car racing game with some challenging routes. There are two levels. One is easy and he second one is hard.
-After entering your name, the user gets to choose the route. The car is controlled by the arrow keys (WASD). 
-Each route has its specific obstacles (rocks, trees and other things that can stop you from moving), if he
-crushes into an obstacle he will have to start over. There is a time counter for the game;
-when the user exits the game, his/her lowest time-count will be saved.
+For our final project we made a car racing game with a challenging route. The obstacles are other random cars which move against the user 
+car and the user should avoid clashing with them or he loses the game. There will a timer of 2 minutes in which the user has to finish the 
+race without clashing with obstacles, if he does so, he wins. 
