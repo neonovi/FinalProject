@@ -7,27 +7,32 @@ class Game:
     def __init__(self):
         self.w=1280
         self.h=700
+        self.lane= 'lane'
         self.paused = False
         self.state = 'menu'
         self.name=''
         self.img = loadImage (path+ '\\resources\\bg.png')
         
     def create_game (self):
-        self.lanes=[]
+        # self.lanes=[]
         self.bgImgs=[]
         self.x=0
         self.cnt=0
         self.sec = 0
-                
+        self.user_car = userCar(50,600,100,100,"\\resources\\car7.png")
         #image layers of the background 
         for i in range(4):
-
             self.bgImgs.append(loadImage(path+'\\resources\\layer'+str(i+1)+'.png'))
         #pause sound
+        
         #load resources form the stage file (2 stages)
+        
+        
+
+    
+
     
     def display (self):
-
         cnt = 0
         for img in self.bgImgs:
             if cnt == 0:
@@ -58,21 +63,32 @@ class Game:
         else:
             text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
             
-        
+        self.user_car.display()
                 
 class Car:
-    def __init__(self,x,y,h,w):
+    def __init__(self,x,y,h,w,ImgName):
         self.x=x
         self.y=y
         self.h=h
         self.w=w
+        self.img=loadImage(ImgName)
 
         
-    #def display(self):
-        #displaying the car
+    def display(self):
+        image(self.img,50,600,100,100)
         
-#class userCar(Car):
-    #pass
+class userCar(Car):
+    def __init__(self,x,y,h,w,ImgName):
+        Car.__init__ (self,x,y,h,w,ImgName)
+        
+        
+        
+        self.keyHandler={UP:False, DOWN: False}
+        # self.move_sound=SoundFile (path+'\\resorces\\move_sound.mp3')
+        
+    #def display(self):
+        
+    
 
 #class obstacleCar(Car):
     #pass
@@ -88,7 +104,7 @@ class Car:
         #self.trackwidth=trackwidth
       
 
-
+    
 
 
 
