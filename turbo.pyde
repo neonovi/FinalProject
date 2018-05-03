@@ -1,4 +1,8 @@
-import time, random, os
+
+import random, os
+add_library ('sound')
+path = os.getcwd ()
+
 
 #classes
 
@@ -9,7 +13,7 @@ class Game:
         self.paused = False
         self.state = 'menu'
         self.name=''
-        
+        self.img = loadImage (path+ '\\resources\\bg.png')
         
     def create_game (self):
         self.lanes=[]
@@ -20,6 +24,10 @@ class Game:
         self.min=00
         
         #image layers of the background 
+        for i in range(4):
+            self.bgImgs.append(loadImage(path+'\\resources\\layer1'+str(i+1)+'.png'))
+        
+        
             #for loop here
         #pause sound
         #load resources form the stage file (2 stages)
@@ -40,12 +48,12 @@ class Game:
             text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
             
 class Car:
-    def __init__(self,x,y,h,w,model):
+    def __init__(self,x,y,h,w):
         self.x=x
         self.y=y
         self.h=h
         self.w=w
-        self.model=model
+
         
     #def display(self):
         #displaying the car
@@ -83,7 +91,8 @@ def setup():
   
 def draw():
     if game.state == 'menu':
-        background(0)
+        background(255)
+        image (game.img, 0, 0, game.h, game.w)
         if game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
         and game.h//2-110 <= mouseY <= game.h//2-80:
             fill(0,255,0)
