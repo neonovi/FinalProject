@@ -41,6 +41,22 @@ class Game:
         else:
             text('{0}:{1}'.format(self.sec//60,self.sec%60), 10, 50)
             
+        
+        cnt = 0
+        for img in self.bgImgs:
+            if cnt == 0:
+                x = (self.x//10)%self.w
+            elif cnt == 1:
+                x = (self.x//5)%self.w
+            elif cnt == 2:
+                x = (self.x//3)%self.w
+            else:
+                x = (self.x)%self.w
+                
+            image(img,0,0,self.w-x,self.h,x,0,self.w,self.h)
+            image(img,self.w-x-1,0,x,self.h,0,0,x,self.h)
+            cnt+=1
+                
 class Car:
     def __init__(self,x,y,h,w):
         self.x=x
@@ -85,20 +101,19 @@ def setup():
   
 def draw():
     if game.state == 'menu':
-        background(255)
-        image (game.img, 0, 0, game.h, game.w)
+        image (game.img, 0, 0, game.w, game.h)
         if game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
         and game.h//2-110 <= mouseY <= game.h//2-80:
             fill(0,255,0)
         else:
-            fill(255)
+            fill(0)
         textSize(32)
         text("Play Game",game.w//2-80,game.h//2-80)
         if game.state=='menu' and game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
         and game.h//2-10 <= mouseY <= game.h//2+40:
             fill(0,255,0)
         else:
-            fill(255)
+            fill(0)
         textSize(32)
         text("Highscores", game.w//2-80,game.h//2+30)
     elif game.state == 'play':
