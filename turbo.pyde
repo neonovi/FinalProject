@@ -16,9 +16,8 @@ class Game:
         self.bgImgs=[]
         self.x=0
         self.cnt=0
-        self.sec = 00
-        self.min=00
-        
+        self.sec = 0
+                
         #image layers of the background 
             #for loop here
         #pause sound
