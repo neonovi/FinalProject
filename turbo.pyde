@@ -20,12 +20,12 @@ class Game:
         self.x=0
         self.cnt=0
         self.sec = 120
-        self.user_car = userCar(50,620,150,70,"\\resources\\ucar.png")
+        self.user_car = userCar(50,560,150,70,"\\resources\\ucar.png")
         # self.user_car1= userCar(50,480,150,70,"\\resources\\car6.png")
         # self.user_car2= userCar(50,550,150,70,"\\resources\\car5.png")
         
-        for i in range (12):
-            self.obscar.append(obstacleCar((200+i*150),(490+70*random.randint(0,2)),150,70,'\\resources\\car'+str(random.randint(0,6))+'.png'))
+        for i in range (100):
+            self.obscar.append(obstacleCar((200+i*300),(490+70*random.randint(0,2)),150,70,'\\resources\\car'+str(random.randint(0,6))+'.png'))
         
         #image layers of the background 
         for i in range(4):
@@ -74,7 +74,7 @@ class Game:
         
         for i in self.obscar:
             i.display()
-
+            i.x-=4
                 
 class Car:
     def __init__(self,x,y,w,h,ImgName):
@@ -103,15 +103,15 @@ class userCar(Car):
 
     
     def update(self):
-        if self.keyHandler[UP]:
+        if self.keyHandler[UP] and self.y>490:
             self.lane = -10
-        elif self.keyHandler[DOWN]:
+        elif self.keyHandler[DOWN] and self.y<630:
             self.lane = 10
         else:
             self.lane = 0
         self.y+=self.lane
         # self.move_sound=SoundFile (path+'\\resorces\\move_sound.mp3')
-        
+        game.x +=2
     #def display(self):
         
     
