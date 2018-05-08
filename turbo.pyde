@@ -32,7 +32,7 @@ class Game:
             self.bgImgs.append(loadImage(path+'\\resources\\layer'+str(i+1)+'.png'))
         #pause sound
         
-        #load resources form the stage file (2 stages)
+
         
         
 
@@ -123,30 +123,31 @@ class userCar(Car):
         else:
             self.lane = 0
         self.y+=self.lane
-
+        game.x +=2
 
 
         #collision detection
         
         for o in game.obs_car:
-            if self.distance (game.user_car) <= self.distance (self.w-20):
-                print ('you lost')
+            if self.distance (o) < self.w-20 and self.y == o.y:
+                
+                print (self.distance(o))
                 print ('youuuuuu')
-                print ('loooooooooost')
-
-                self.killSound.play()
+                print ('1111111111')
+                print ('22222222')
+                #self.killSound.play()
 
         
         
         
     def distance(self, other):
-        return ((self.x-other.x)**2+(self.y-other.y)**2)**0.5
+        return abs(other.x-self.x)
         
         
        
         # self.move_sound=SoundFile (path+'\\resorces\\move_sound.mp3')
-        game.x +=2
-    #def display(self):
+        
+
         
     
 
@@ -210,9 +211,8 @@ def keyPressed():
         
   
 def keyReleased():
-    #if game.user_car.y == 490 or game.user_car.y == 560 or game.user_car.y == 630:
     game.user_car.keyHandler[keyCode]=False
-        #game.user_car.keyHandler[DOWN]=False
+
 
 
   
