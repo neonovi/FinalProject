@@ -12,20 +12,20 @@ class Game:
         self.state = 'menu'
         self.name=''
         self.img = loadImage (path+ '\\resources\\bg.png')
+        self.gameover = False
         
     def create_game (self):
         # self.lanes=[]
         self.bgImgs=[]
-        self.obscar=[]
+        self.obs_car=[]
         self.x=0
         self.cnt=0
         self.sec = 120
         self.user_car = userCar(50,560,150,70,"\\resources\\ucar.png")
-        # self.user_car1= userCar(50,480,150,70,"\\resources\\car6.png")
-        # self.user_car2= userCar(50,550,150,70,"\\resources\\car5.png")
+
         
         for i in range (100):
-            self.obscar.append(obstacleCar((200+i*300),(490+70*random.randint(0,2)),150,70,'\\resources\\car'+str(random.randint(0,6))+'.png'))
+            self.obs_car.append(obstacleCar((200+i*300),(490+70*random.randint(0,2)),150,70,'\\resources\\car'+str(random.randint(0,6))+'.png'))
         
         #image layers of the background 
         for i in range(4):
@@ -72,7 +72,7 @@ class Game:
             
         self.user_car.display()
         
-        for i in self.obscar:
+        for i in self.obs_car:
             i.display()
             i.x-=6
                 
@@ -91,12 +91,19 @@ class Car:
         
     def update(self):
         self.y+=self.lane
+        
+        
+
+        
+        
+        
+        
     def display(self):
         self.update()
         image(self.img,self.x,self.y,self.w,self.h)
         stroke(0,255,0)
         noFill()
-        rect(self.x+10,self.y+10,self.w-10,self.h-10)
+        rect(self.x+20,self.y+20,self.w-20,self.h-20)
         
 class userCar(Car):
     def __init__(self,x,y,w,h,ImgName):
@@ -117,6 +124,24 @@ class userCar(Car):
             self.lane = 0
         self.y+=self.lane
 
+
+
+        #collision detection
+        
+        for o in game.obs_car:
+            if self.distance (game.user_car) <= self.distance (self.w-20):
+                print ('you lost')
+                print ('youuuuuu')
+                print ('loooooooooost')
+
+                self.killSound.play()
+
+        
+        
+        
+    def distance(self, other):
+        return ((self.x-other.x)**2+(self.y-other.y)**2)**0.5
+        
         
        
         # self.move_sound=SoundFile (path+'\\resorces\\move_sound.mp3')
@@ -128,12 +153,6 @@ class userCar(Car):
 class obstacleCar(Car):
     def __init__(self,x,y,w,h,ImgName):
         Car.__init__ (self,x,y,w,h,ImgName)
-
-      
-
-    
-
-
 
 
 game = Game()
