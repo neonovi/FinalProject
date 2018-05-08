@@ -74,7 +74,7 @@ class Game:
         
         for i in self.obscar:
             i.display()
-            i.x-=10
+            i.x-=6
                 
 class Car:
     def __init__(self,x,y,w,h,ImgName):
@@ -94,25 +94,30 @@ class Car:
     def display(self):
         self.update()
         image(self.img,self.x,self.y,self.w,self.h)
+        stroke(0,255,0)
+        noFill()
+        rect(self.x+10,self.y+10,self.w-10,self.h-10)
         
 class userCar(Car):
     def __init__(self,x,y,w,h,ImgName):
         Car.__init__ (self,x,y,w,h,ImgName)
         self.keyHandler={UP:False,DOWN:False}
         
+        
 
     
     def update(self):
         if self.keyHandler[UP] and self.y>490:
-            self.lane = -10
+            self.lane = -70
             self.keyHandler[UP]=False
         elif self.keyHandler[DOWN] and self.y<630:
-            self.lane = 10
+            self.lane = 70
             self.keyHandler[DOWN]=False
         else:
             self.lane = 0
-        #for i in range(7):
         self.y+=self.lane
+
+        
        
         # self.move_sound=SoundFile (path+'\\resorces\\move_sound.mp3')
         game.x +=2
@@ -123,18 +128,7 @@ class userCar(Car):
 class obstacleCar(Car):
     def __init__(self,x,y,w,h,ImgName):
         Car.__init__ (self,x,y,w,h,ImgName)
-        
-      
-    #def display (self):
-        #image (self.obscar,50, 50,self.w,self.h)
-  
-  
-#class racetrack:
-    #def __init__(self,track):
-        #self.track=track
-        
-    #def createtrack(self,trackwidth):
-        #self.trackwidth=trackwidth
+
       
 
     
@@ -173,9 +167,13 @@ def draw():
         text('TURBO',game.w//2-110,game.h-600)
         
     elif game.state == 'play':
+        
         if not game.paused:
+            
             background(0)
             game.display()
+            #textSize(32)
+            #text(game.user_car.y,game.w//2,game.h//2)
         else:
             fill(255,0,0)
             textSize(32)
@@ -193,7 +191,11 @@ def keyPressed():
         
   
 def keyReleased():
+    #if game.user_car.y == 490 or game.user_car.y == 560 or game.user_car.y == 630:
     game.user_car.keyHandler[keyCode]=False
+        #game.user_car.keyHandler[DOWN]=False
+
+
   
 def mouseClicked():
     if game.state=='menu' and game.w//2-80 <= mouseX <= game.w//2+80 \
