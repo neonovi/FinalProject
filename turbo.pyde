@@ -74,7 +74,7 @@ class Game:
         
         for i in self.obscar:
             i.display()
-            i.x-=4
+            i.x-=10
                 
 class Car:
     def __init__(self,x,y,w,h,ImgName):
@@ -105,11 +105,15 @@ class userCar(Car):
     def update(self):
         if self.keyHandler[UP] and self.y>490:
             self.lane = -10
+            self.keyHandler[UP]=False
         elif self.keyHandler[DOWN] and self.y<630:
             self.lane = 10
+            self.keyHandler[DOWN]=False
         else:
             self.lane = 0
+        #for i in range(7):
         self.y+=self.lane
+       
         # self.move_sound=SoundFile (path+'\\resorces\\move_sound.mp3')
         game.x +=2
     #def display(self):
