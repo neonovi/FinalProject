@@ -230,7 +230,7 @@ def keyPressed():
         game.user_car.keyHandler[keyCode]=True
         game.horn.play()
         
-        if keyCode == 80:
+        if keyCode == 32:
             game.paused = not game.paused
             #game.pauseSound.play()
     elif game.state=='inputName':
