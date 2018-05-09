@@ -30,11 +30,16 @@ class Game:
         #image layers of the background 
         for i in range(4):
             self.bgImgs.append(loadImage(path+'\\resources\\layer'+str(i+1)+'.png'))
-        #pause sound
         
+        
+        self.bgmusic=SoundFile(this, path+"\\resources\\bgmusic.mp3")
+        self.bgmusic.amp(0.5)
+        self.bgmusic.play()
 
-        
-        
+
+
+        self.horn = SoundFile (this, path+"\\resources\\horn.wav")
+        self.horn.amp(0.05)
 
     
 
@@ -111,7 +116,7 @@ class userCar(Car):
         Car.__init__ (self,x,y,w,h,ImgName)
         self.keyHandler={UP:False,DOWN:False}
         
-        
+        self.crash = SoundFile (this, path+"\\resources\\crash.wav")
 
     
     def update(self):
@@ -135,7 +140,7 @@ class userCar(Car):
                 
                 print (self.distance(o))
                 game.state = 'inputName'
-                #self.killSound.play()
+                self.crash.play()
 
         
         
@@ -223,6 +228,8 @@ def draw():
 def keyPressed():
     if game.state == 'play':
         game.user_car.keyHandler[keyCode]=True
+        game.horn.play()
+        
         if keyCode == 80:
             game.paused = not game.paused
             #game.pauseSound.play()
